@@ -1,25 +1,21 @@
-import React, { Component } from "react";
+import React from "react";
 
 
-class BeerItem extends Component {
+const BeerItem = (props) => {
 
+  console.log("beerItem props", props)
+	console.log("---")
 
+	function handleClick () {
+   return props.showBeerDetails(props.beer)
+   }
 
-	handleClick = () => {
-
-   return this.props.showBeerDetails(this.props.beer)
-
-	}
-
-	render() {
-	  console.log("beerItem props", this.props)
-	  console.log("---")
     return (
-      <li className="beer-item" onClick={this.handleClick}>
-        {this.props.beer.name/* beer name goes here */}
+      <li className="beer-item" onClick={handleClick}>
+        {props.beer.name/* beer name goes here */}
       </li>
     );
-  }
+
 };
 
 export default BeerItem;
