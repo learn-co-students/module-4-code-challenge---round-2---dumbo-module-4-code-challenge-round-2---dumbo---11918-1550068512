@@ -1,10 +1,10 @@
 import React from "react";
 
-const BeerDetail = () => {
+const BeerDetail = (props) => {
   return (
     <div className="beer-card">
-      <img alt="" src={""} />
-      <p>{/*beer description goes here*/}</p>
+      <img alt={props.clickedBeer.name} src={props.clickedBeer.image_url} />
+      <p>{props.clickedBeer.description}</p>
     </div>
   );
 };
