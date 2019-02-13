@@ -42,9 +42,9 @@ class BeerContainer extends Component {
       return <BeerItem key={beer.id} beer={beer} clickHandler={this.clickHandler}/>
     })
 
-    // this.setState({
-    //   beers: filteredBeers
-    // })
+    this.setState({
+      beers: filteredBeers
+    })
   }
 
   render() {
