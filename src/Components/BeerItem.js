@@ -1,9 +1,10 @@
 import React from "react";
 
-const BeerItem = () => {
+const BeerItem = (props) => {
   return (
-    <li className="beer-item" onClick={""}>
-      {/* beer name goes here */}
+
+    <li className="beer-item" onClick={() => props.handleClick(props.beer)}>
+      {props.beer.name}
     </li>
   );
 };
