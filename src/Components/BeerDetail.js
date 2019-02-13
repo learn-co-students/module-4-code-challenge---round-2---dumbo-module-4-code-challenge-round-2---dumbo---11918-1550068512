@@ -4,8 +4,8 @@ const BeerDetail = props => {
   console.log(props);
   return (
     <div className="beer-card">
-      <img alt={props.name} src={props.image} />
-      <p>{props.description}</p>
+      <img alt={props.beer.name} src={props.beer.image_url} />
+      <p>{props.beer.description}</p>
     </div>
   );
 };

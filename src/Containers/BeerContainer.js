@@ -7,7 +7,7 @@ class BeerContainer extends Component {
   state = {
     beers: [],
     searchTerm: '',
-    single: []
+    single: {}
   }
 
   componentDidMount = () => {
@@ -19,7 +19,7 @@ class BeerContainer extends Component {
   }
 
   mapBeers = () => {
-    return this.state.beers.map(beer =>(
+    return this.filterArray().map(beer =>(
       <BeerItem key={beer.id} beer={beer} clickHandler={this.clickHandler}/>
     ))
   }
@@ -30,12 +30,8 @@ class BeerContainer extends Component {
   }
 
   renderOneBeer = beerObj => {
-    if(this.state.beers.find(beer => beer.id === beerObj.id)){
-      return <BeerDetail key={beerObj.id} beer={beerObj} />
-    }
-  /*  this.setState({ single: beerObj }) */
+   this.setState({ single: beerObj })
   }
-
 
   changeHandler = e => {
     this.setState({
@@ -55,7 +51,7 @@ class BeerContainer extends Component {
         <Search changeHandler={this.changeHandler} value={this.state.searchTerm}/>
         <br />
         <ul className="container">{ this.mapBeers() }</ul>
-        // <BeerDetail beer={this.state.single}/>
+        <BeerDetail beer={this.state.single}/>
       </div>
     );
   }
