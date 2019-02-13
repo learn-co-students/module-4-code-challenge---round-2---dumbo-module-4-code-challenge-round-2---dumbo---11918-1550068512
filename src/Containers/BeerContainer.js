@@ -23,6 +23,13 @@ class BeerContainer extends Component {
     );
   };
 
+  changeHandler = e => {
+    console.log(e.target.value);
+    this.setState({
+      searchValue: e.target.value
+    });
+  };
+
   componentDidMount() {
     fetch("http://localhost:3001/beers")
       .then(res => res.json())
@@ -31,7 +38,26 @@ class BeerContainer extends Component {
       });
   }
 
+  searchFilter = () => {
+    let returnValue = [...this.state.beers].filter(beer => {
+      return beer.name
+        .toLowerCase()
+        .startsWith(this.state.searchValue.toLowerCase());
+    });
+    return returnValue.map(beer => {
+      return (
+        <BeerItem
+          key={beer.id}
+          name={beer.name}
+          obj={beer}
+          clickHandler={this.clickHandler}
+        />
+      );
+    });
+  };
+
   render() {
+    this.searchFilter();
     let beers = this.state.beers.map(beer => {
       return (
         <BeerItem
@@ -45,10 +71,13 @@ class BeerContainer extends Component {
 
     return (
       <div>
-        <Search />
+        <Search
+          value={this.state.searchValue}
+          changeHandler={this.changeHandler}
+        />
         <br />
         <ul className="container">
-          {this.state.beers.length > 0 ? beers : <h1>Loading</h1>}
+          {this.state.searchValue.length > 0 ? this.searchFilter() : beers}
         </ul>
         {Object.keys(this.state.selectedBeer).length > 0 ? (
           <BeerDetail beer={this.state.selectedBeer} />
