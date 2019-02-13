@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Search from "../Components/Search";
 import BeerDetail from "../Components/BeerDetail";
 import BeerItem from "../Components/BeerItem";
+
 class BeerContainer extends Component {
 
   state = {
@@ -35,10 +36,9 @@ class BeerContainer extends Component {
   }
 
   render() {
-
     return (
       <div>
-        <Search input={this.state.input} inputValue={this.inputValue} />
+        <Search input={this.state.input} handleChange={this.inputValue} />
         <br />
         <ul className="container">{this.beers()}</ul>
         <BeerDetail beer={this.state.beer} />
@@ -46,5 +46,4 @@ class BeerContainer extends Component {
     );
   }
 }
-
 export default BeerContainer;
