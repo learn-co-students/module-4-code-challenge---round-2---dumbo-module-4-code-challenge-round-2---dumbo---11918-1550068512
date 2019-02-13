@@ -7,7 +7,8 @@ class BeerContainer extends Component {
 
   state={
     beers: [],
-    clickedBeer: {}
+    clickedBeer: {},
+    searchTerm: ''
   }
 
   componentDidMount(){
@@ -24,15 +25,34 @@ class BeerContainer extends Component {
     })
   }
 
-  render() {
-    let beers = this.state.beers.map(beer => {
+  changeHandler = (e) => {
+    this.setState({
+      searchTerm: e.target.value
+    })
+  }
+
+  renderFilteredItems = () => {
+
+  let filteredBeers = this.state.beers.filter(beer => {
+      let term = this.state.searchTerm.toLowerCase()
+      return beer.name.toLowerCase().includes(term)
+    })
+
+    return filteredBeers.map(beer => {
       return <BeerItem key={beer.id} beer={beer} clickHandler={this.clickHandler}/>
     })
+
+    // this.setState({
+    //   beers: filteredBeers
+    // })
+  }
+
+  render() {
     return (
       <div>
-        <Search />
+        <Search searchTerm={this.state.searchTerm} changeHandler={this.changeHandler}/>
         <br />
-        <ul className="container">{beers}</ul>
+        <ul className="container">{this.renderFilteredItems()}</ul>
         <BeerDetail clickedBeer={this.state.clickedBeer}/>
       </div>
     );
